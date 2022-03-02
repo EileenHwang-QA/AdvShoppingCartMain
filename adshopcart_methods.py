@@ -98,32 +98,39 @@ def create_new_user():
 
         driver.find_element(By.XPATH, '//input[@name= "postal_codeRegisterPage"]').send_keys(locators.postal_code)
         sleep(0.25)
- 
+
         bool()
         checkbox_promoption = driver.find_element(By.XPATH, '//input[@name= "allowOffersPromotion"]')
         if checkbox_promoption:
             checkbox_promoption.click()
             sleep(2)
             if checkbox_promoption.is_selected():
-                print('Checked "promotion" checkbox')
+                print('Checked "promotion.." checkbox')
 
             else:
-                print('unchecked "promotion" checkbox')
+                print('unchecked "promotion.." checkbox')
 
         checkbox_iagree = driver.find_element(By.XPATH, '//input[@name= "i_agree"]')
         if checkbox_iagree:
             checkbox_iagree.click()
             sleep(2)
             if checkbox_iagree.is_selected():
-                print('Checked "I_agree.." in checkbox')
+                print('Checked "I_agree.." checkbox')
 
             else:
-                print('Unchecked "I_agree.." in checkbox')
+                print('Unchecked "I_agree.." checkbox')
 
-        driver.find_element(By.ID, 'register_btnundefined').click()
-        print(f'Test scenario: Create a new user - Username- "{locators.new_username},\n'
-              f'Full name- "{locators.full_name}", Email- "{locators.email} -------is passed')
-        sleep(3)
+        register_btn = driver.find_element(By.ID, 'register_btnundefined')
+        if register_btn.is_enabled():
+            register_btn.click()
+            sleep(3)
+            print('Register button is enable')
+
+        else:
+            print('Register button is disabled.Check your code!')
+
+    print(f'Test scenario: Create a new user - New user account is created.\n'
+          f' Username- "{locators.new_username},Full name- "{locators.full_name}", Email- "{locators.email} -------is passed')
 
 
 def check_new_user_account():
@@ -174,6 +181,7 @@ def login_with_new_credential():
 
     driver.find_element(By.ID, 'sign_in_btnundefined').click()
     sleep(2)
+
     print(f'Test scenario: login with new credential:\n'
           f' Username- "{locators.new_username}",Password- "{locators.new_password}"-------------------is passed')
 
@@ -195,6 +203,7 @@ def delete_user():
         sleep(2)
 
         driver.find_element(By.XPATH, '//*[@class="deletePopupBtn deleteRed"]').click()
+        sleep(2)
         print(f'Test scenario: Delete new user account Username - "{locators.new_username} -------is passed')
         sleep(10)
 
@@ -221,21 +230,22 @@ def login_with_deleted_user():
         sleep(2)
 
         driver.find_element(By.XPATH, '//*[@class="closeBtn loginPopUpCloseBtn"]').click()
+        sleep(2)
+
         print(f'Test scenario: Check login with a deleted user account \n'
               f'Username- "{locators.new_username}", password- "{locators.new_password}"\n'
               f'"Incorrect user name or password" error message is displayed -------is passed')
-        sleep(2)
 
     else:
         print('something goes wrong. Check your code!')
 
 
-setUp()
-create_new_user()
-check_new_user_account()
-login_with_new_credential()
-delete_user()
-login_with_deleted_user()
-tearDown()
+# setUp()
+# create_new_user()
+# check_new_user_account()
+# login_with_new_credential()
+# delete_user()
+# login_with_deleted_user()
+# tearDown()
 
 
