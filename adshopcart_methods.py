@@ -51,53 +51,53 @@ def create_new_user():
 
     if driver.current_url == locators.adshopcart_register_url:
         driver.find_element(By.XPATH, '//h3[text()="CREATE ACCOUNT"]').is_displayed()
-        sleep(0.25)
+        sleep(0.5)
         print(f'We are at register page- {locators.adshopcart_register_url}')
 
         driver.find_element(By.XPATH, '//input[@name= "usernameRegisterPage"]').click()
-        sleep(0.25)
+        sleep(0.5)
 
         # Enter fake data into username open fields
         driver.find_element(By.XPATH, '//input[@name= "usernameRegisterPage"]').send_keys(locators.new_username)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "emailRegisterPage"]').send_keys(locators.email)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "passwordRegisterPage"]').send_keys(locators.new_password)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "confirm_passwordRegisterPage"]').send_keys(locators.new_password)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "first_nameRegisterPage"]').send_keys(locators.first_name)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "last_nameRegisterPage"]').send_keys(locators.last_name)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "phone_numberRegisterPage"]').send_keys(locators.phone)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.execute_script("window.scrollTo(0,500);")
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//select[@name= "countryListboxRegisterPage"]').click()
-        sleep(0.25)
+        sleep(0.5)
 
         Select(driver.find_element(By.XPATH, '//select[@name= "countryListboxRegisterPage"]')).select_by_visible_text(
             'Canada')
         driver.find_element(By.XPATH, '//input[@name= "cityRegisterPage"]').send_keys(locators.city)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "addressRegisterPage"]').send_keys(locators.address)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "state_/_province_/_regionRegisterPage"]').send_keys(locators.province)
-        sleep(0.25)
+        sleep(0.5)
 
         driver.find_element(By.XPATH, '//input[@name= "postal_codeRegisterPage"]').send_keys(locators.postal_code)
-        sleep(0.25)
+        sleep(0.5)
 
         bool()
         checkbox_promoption = driver.find_element(By.XPATH, '//input[@name= "allowOffersPromotion"]')
@@ -240,12 +240,147 @@ def login_with_deleted_user():
         print('something goes wrong. Check your code!')
 
 
-# setUp()
-# create_new_user()
-# check_new_user_account()
-# login_with_new_credential()
-# delete_user()
-# login_with_deleted_user()
-# tearDown()
+def check_text():
+    # check main logo
+    if driver.current_url == locators.advantage_shopping_cart_url:
+        driver.find_element(By.XPATH, "//span[contains(., 'dvantage')]").is_displayed()
+        print('Test scenario: Check Home logo -------passed')
+
+    # check speaker text
+    if driver.find_element(By.ID, 'speakersTxt').is_displayed():
+        sleep(5)
+        driver.find_element(By.ID, 'speakersTxt').click()
+        sleep(2)
+        if driver.current_url == locators.speaker_url:
+            assert driver.find_element(By.XPATH, "//h3[contains(., 'SPEAKERS')]").is_displayed()
+            print(f'Navigate to speaker page "{locators.speaker_url}"')
+            sleep(2)
+
+        else:
+            print('Error found.Check Your code!')
+
+        driver.back()
+        sleep(2)
+
+    # check tablet text
+
+        driver.find_element(By.ID, 'tabletsTxt').is_displayed()
+        sleep(2)
+
+        driver.find_element(By.ID, 'tabletsTxt').click()
+        sleep(2)
+
+        if driver.current_url == locators.tablet_url:
+            assert driver.find_element(By.XPATH, "//h3[contains(., 'TABLETS')]").is_displayed()
+            print(f'Navigate to tablet page "{locators.tablet_url}"')
+
+        else:
+            print('Error found.Check Your code!')
+
+        driver.back()
+        sleep(2)
+
+    # check laptops text
+        if driver.find_element(By.ID, 'laptopsTxt').is_displayed():
+            sleep(2)
+        driver.find_element(By.ID, 'laptopsTxt').click()
+        sleep(2)
+        if driver.current_url == locators.laptop_url:
+            assert driver.find_element(By.XPATH, "//h3[contains(., 'LAPTOPS')]").is_displayed()
+            print(f'Navigate to laptop page "{locators.laptop_url}"')
+
+        else:
+            print('Error found.Check Your code!')
+
+        driver.back()
+        sleep(2)
+
+    # check mice text
+    if driver.find_element(By.ID, 'miceTxt').is_displayed():
+        sleep(2)
+        driver.find_element(By.ID, 'miceTxt').click()
+        sleep(2)
+        if driver.current_url == locators.mice_url:
+            assert driver.find_element(By.XPATH, "//h3[contains(., 'MICE')]").is_displayed()
+            print(f'Navigate to mice page "{locators.mice_url}"')
+
+        else:
+            print('Error found.Check Your code!')
+
+        driver.back()
+        sleep(2)
+
+    # check headphones text
+    if driver.find_element(By.ID, 'headphonesTxt').is_displayed():
+        sleep(2)
+        driver.find_element(By.ID, 'headphonesTxt').click()
+        sleep(2)
+        if driver.current_url == locators.headphone_url:
+            assert driver.find_element(By.XPATH, "//h3[contains(., 'HEADPHONES')]").is_displayed()
+            print(f'Navigate to headphones page "{locators.headphone_url}"')
+
+        else:
+            print('Error found.Check Your code!')
+
+        print('Test scenario: Check that SPEAKERS, TABLETS, HEADPHONES, LAPTOPS, MICE texts are displayed------passed.')
+
+        driver.back()
+        sleep(2)
+
+def check_top_nav_menu():
+    if driver.current_url == locators.advantage_shopping_cart_url:
+        driver.find_element(By.LINK_TEXT, 'OUR PRODUCTS').click()
+        print('"OUR PRODUCTS" Key is clickable')
+        sleep(2)
+        driver.find_element(By.LINK_TEXT, 'SPECIAL OFFER').click()
+        print('"SPECIAL OFFER" Key is clickable')
+        sleep(2)
+        driver.find_element(By.LINK_TEXT, 'POPULAR ITEMS').click()
+        print('"POPULAR ITEMS Key is clickable')
+        sleep(2)
+        driver.find_element(By.LINK_TEXT, 'CONTACT US').click()
+        print('"CONTACT US Key is clickable')
+        sleep(2)
+
+    else:
+        print('top menu is Not clickable. Check your code!')
+
+    print('Test scenario: Check all top nav menu are clickable ------passed')
+
+
+def check_contact_us_form():
+    driver.find_element(By.NAME, "categoryListboxContactUs").click()
+    sleep(0.5)
+
+    Select(driver.find_element(By.NAME, "categoryListboxContactUs")).select_by_visible_text("Tablets")
+    sleep(0.5)
+
+    driver.find_element(By.NAME, "productListboxContactUs").click()
+    sleep(0.5)
+
+    Select(driver.find_element(By.NAME, "productListboxContactUs")).select_by_visible_text("HP Pro Tablet 608 G1")
+    sleep(0.5)
+
+    driver.find_element(By.NAME, "emailContactUs").send_keys(locators.email)
+    sleep(0.5)
+
+    driver.find_element(By.NAME, "subjectTextareaContactUs").send_keys(locators.subject)
+    sleep(0.5)
+
+    send_btn = driver.find_element(By.ID, 'send_btnundefined')
+    if send_btn.is_enabled():
+        send_btn.click()
+        sleep(1)
+        print('Send button is enable')
+
+    else:
+        print('Send button is disabled.Check your code!')
+
+    print('Test scenario:  Check "CONTACT US form"------------passed')
+
+
+
+
+
 
 
