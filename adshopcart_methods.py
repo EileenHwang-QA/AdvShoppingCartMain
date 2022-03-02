@@ -27,6 +27,7 @@ def setUp():
     if driver.current_url == locators.advantage_shopping_cart_url and driver.title == "\u00A0""Advantage Shopping":
         print(f'we are at advantage online shopping homepage --{driver.current_url}')
         print(f'we\'re seeing title message --{driver.title} ')
+        sleep(2)
 
     else:
         print(f'we\'re not at the advantage online shopping homepage, Check your code!')
@@ -46,12 +47,12 @@ def create_new_user():
     driver.find_element(By.ID, 'menuUser').click()
     sleep(3)
     driver.find_element(By.LINK_TEXT, 'CREATE NEW ACCOUNT').click()
-    sleep(0.25)
+    sleep(2)
 
     if driver.current_url == locators.adshopcart_register_url:
         driver.find_element(By.XPATH, '//h3[text()="CREATE ACCOUNT"]').is_displayed()
         sleep(0.25)
-        print(f'We are at register page: {locators.adshopcart_register_url}')
+        print(f'We are at register page- {locators.adshopcart_register_url}')
 
         driver.find_element(By.XPATH, '//input[@name= "usernameRegisterPage"]').click()
         sleep(0.25)
@@ -118,16 +119,18 @@ def check_new_user_account():
 
         if driver.current_url == locators.my_account_url:
             assert driver.find_element(By.XPATH, f'//label[contains(.,"{locators.full_name}")]').is_displayed()
-            print(f'Test scenario: Check created new user account with Full name- "{locators.full_name}"-----is passed')
+            print(f'Test scenario: Navigate to My account page-"{locators.my_account_url}",\n'
+                  f'Check created new user account with Full name- "{locators.full_name}"-----is passed')
 
     # Click by "My Order" button
         driver.find_element(By.ID, 'menuUser').click()
         sleep(2)
 
         driver.find_element(By.XPATH, '//*[@id ="loginMiniTitle"]/label[2]').click()
+        sleep(2)
         if driver.current_url == locators.my_order_url:
             assert driver.find_element(By.XPATH, f'//label[contains(.," - No orders - ")]').is_displayed()
-            print(f'Test scenario: Check my order page -------is passed')
+            print(f'Test scenario: Navigate to My order page "{locators.my_order_url}", Check " NO orders "-------is passed')
 
     # Click by "Sign Out" button
         driver.find_element(By.ID, 'menuUser').click()
@@ -137,7 +140,8 @@ def check_new_user_account():
         sleep(2)
 
         if driver.current_url == locators.advantage_shopping_cart_url:
-            print('Test scenario: Sign out  -------is passed')
+            print(f'Test scenario: Navigate to Sign out page"{locators.advantage_shopping_cart_url}"\n'
+                  f' Sign out  -------is passed')
 
 
 def login_with_new_credential():
@@ -152,8 +156,8 @@ def login_with_new_credential():
 
     driver.find_element(By.ID, 'sign_in_btnundefined').click()
     sleep(2)
-    print(f'Test scenario: login with new credential: Username- "{locators.new_username}",\n'
-          f'Password- "{locators.new_password}"-------------------is passed')
+    print(f'Test scenario: login with new credential:\n'
+          f' Username- "{locators.new_username}",Password- "{locators.new_password}"-------------------is passed')
 
 
 def delete_user():
@@ -173,7 +177,7 @@ def delete_user():
         sleep(2)
 
         driver.find_element(By.XPATH, '//*[@class="deletePopupBtn deleteRed"]').click()
-        print('Test scenario: Delete new user account  -------is passed')
+        print(f'Test scenario: Delete new user account Username - "{locators.new_username} -------is passed')
         sleep(10)
 
     else:
@@ -199,7 +203,8 @@ def login_with_deleted_user():
         sleep(2)
 
         driver.find_element(By.XPATH, '//*[@class="closeBtn loginPopUpCloseBtn"]').click()
-        print('Test scenario: Check login with a deleted user account  -------is passed')
+        print(f'Test scenario: Check login with a deleted user account \n'
+              f'Username- "{locators.new_username}", password- "{locators.new_password}" -------is passed')
         sleep(2)
 
     else:
