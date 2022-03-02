@@ -27,7 +27,7 @@ def setUp():
     if driver.current_url == locators.advantage_shopping_cart_url and driver.title == "\u00A0""Advantage Shopping":
         print(f'we are at advantage online shopping homepage --{driver.current_url}')
         print(f'we\'re seeing title message --{driver.title} ')
-        sleep(2)
+        sleep(1)
 
     else:
         print(f'we\'re not at the advantage online shopping homepage, Check your code!')
@@ -47,7 +47,7 @@ def create_new_user():
     driver.find_element(By.ID, 'menuUser').click()
     sleep(3)
     driver.find_element(By.LINK_TEXT, 'CREATE NEW ACCOUNT').click()
-    sleep(2)
+    sleep(3)
 
     if driver.current_url == locators.adshopcart_register_url:
         driver.find_element(By.XPATH, '//h3[text()="CREATE ACCOUNT"]').is_displayed()
@@ -98,9 +98,27 @@ def create_new_user():
 
         driver.find_element(By.XPATH, '//input[@name= "postal_codeRegisterPage"]').send_keys(locators.postal_code)
         sleep(0.25)
+ 
+        bool()
+        checkbox_promoption = driver.find_element(By.XPATH, '//input[@name= "allowOffersPromotion"]')
+        if checkbox_promoption:
+            checkbox_promoption.click()
+            sleep(2)
+            if checkbox_promoption.is_selected():
+                print('Checked "promotion" checkbox')
 
-        driver.find_element(By.XPATH, '//input[@name= "i_agree"]').click()
-        sleep(0.25)
+            else:
+                print('unchecked "promotion" checkbox')
+
+        checkbox_iagree = driver.find_element(By.XPATH, '//input[@name= "i_agree"]')
+        if checkbox_iagree:
+            checkbox_iagree.click()
+            sleep(2)
+            if checkbox_iagree.is_selected():
+                print('Checked "I_agree.." in checkbox')
+
+            else:
+                print('Unchecked "I_agree.." in checkbox')
 
         driver.find_element(By.ID, 'register_btnundefined').click()
         print(f'Test scenario: Create a new user - Username- "{locators.new_username},\n'
@@ -204,19 +222,20 @@ def login_with_deleted_user():
 
         driver.find_element(By.XPATH, '//*[@class="closeBtn loginPopUpCloseBtn"]').click()
         print(f'Test scenario: Check login with a deleted user account \n'
-              f'Username- "{locators.new_username}", password- "{locators.new_password}" -------is passed')
+              f'Username- "{locators.new_username}", password- "{locators.new_password}"\n'
+              f'"Incorrect user name or password" error message is displayed -------is passed')
         sleep(2)
 
     else:
         print('something goes wrong. Check your code!')
 
 
-# setUp()
-# create_new_user()
-# check_new_user_account()
-# login_with_new_credential()
-# delete_user()
-# login_with_deleted_user()
-# tearDown()
+setUp()
+create_new_user()
+check_new_user_account()
+login_with_new_credential()
+delete_user()
+login_with_deleted_user()
+tearDown()
 
 
