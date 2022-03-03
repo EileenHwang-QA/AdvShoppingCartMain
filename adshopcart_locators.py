@@ -10,8 +10,8 @@ laptop_url = 'https://advantageonlineshopping.com/#/category/Laptops/1'
 mice_url = 'https://advantageonlineshopping.com/#/category/Mice/5'
 headphone_url ='https://advantageonlineshopping.com/#/category/Headphones/2'
 new_username = fake.user_name()
-if len(new_username) > 15:
-    new_username = new_username[0:14]
+if len(new_username) >= 15:
+    new_username = new_username[5:14]
 new_password = fake.password()
 first_name = fake.first_name()
 last_name = fake.last_name()
